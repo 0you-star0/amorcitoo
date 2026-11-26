@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f4f8fc">
+    <title>tiendita :3</title>
+    <style>
+/* ===================== BASE ===================== */
+:root {
+    --ink: #333333;
+    --muted: #666666;
+    --soft-bg: #f7f9fc;
+    --card: #ffffff;
+    --accent: aliceblue;
+    --accent-strong: #dcecf8;
+    --line: #d7e5ef;
+    --shadow: 0 5px 18px rgba(42, 65, 82, 0.09);
+    --shadow-hover: 0 11px 25px rgba(42, 65, 82, 0.15);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    color: var(--ink);
+    line-height: 1.6;
+    background: #ffffff;
+}
+
+button,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* ===================== HEADER ===================== */
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: rgba(255, 255, 255, 0.96);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+    backdrop-filter: blur(10px);
+}
+
+.nav-bar {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.logo {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: start;
+    color: var(--ink);
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.nav-links {
+    grid-column: 3;
+    justify-self: end;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-links a {
+    color: var(--ink);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+    color: #66849b;
+}
+
+.wallet {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: center;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.55rem 1rem;
+    color: var(--ink);
+    background: var(--accent);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-weight: bold;
+    white-space: nowrap;
+    transform-origin: center;
+}
+
+.wallet-icon {
+    font-size: 1.1rem;
+}
+
+.wallet.bump {
+    animation: wallet-bump 0.55s ease;
+}
+
+@keyframes wallet-bump {
+    0%, 100% { transform: scale(1); }
+    35% { transform: scale(1.13) rotate(-2deg); }
+    65% { transform: scale(0.97) rotate(1deg); }
+}
+
+/* ===================== PORTADA ===================== */
+.hero {
+    min-height: 50vh;
+    padding: 4rem 1.25rem;
+    background:
+        linear-gradient(rgba(55, 55, 55, 0.48), rgba(55, 55, 55, 0.48)),
+        url("https://i.pinimg.com/1200x/7f/41/3c/7f413c49d1b5859009ecf299bbcc34a2.jpg");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #ffffff;
+}
+
+.hero h1 {
+    margin-bottom: 0.8rem;
+    font-size: 3rem;
+}
+
+.hero p {
+    font-size: 1.1rem;
+}
+
+.cta-button,
+.redeem-button,
+.mission-button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid transparent;
+    border-radius: 7px;
+    background: var(--accent);
+    color: #111111;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cta-button {
+    margin-top: 1.7rem;
+    padding: 0.85rem 1.6rem;
+}
+
+.cta-button:hover,
+.redeem-button:hover,
+.mission-button:not(:disabled):hover {
+    background: #333333;
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.12);
+}
+
+/* ===================== TITULOS DE SECCION ===================== */
+.section-heading {
+    margin-bottom: 2.3rem;
+    text-align: center;
+}
+
+.section-heading h2 {
+    margin-bottom: 0.45rem;
+    color: var(--ink);
+    font-size: 1.5rem;
+}
+
+.section-heading p {
+    color: var(--muted);
+}
+
+/* ===================== PRODUCTOS ===================== */
+.products-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+}
+
+.productos-grid,
+.final-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.productos-card,
+.final-card {
+    overflow: hidden;
+    background: var(--card);
+    border: 1px solid #eeeeee;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+
+.productos-card:hover,
+.final-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+}
+
+.productos-card img,
+.final-card img {
+    display: block;
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.product-content {
+    padding: 1.2rem 1.25rem 1.35rem;
+}
+
+.product-content h3 {
+    margin-bottom: 0.35rem;
+    color: var(--ink);
+    font-size: 1.15rem;
+}
+
+.precio {
+    margin: 0.35rem 0;
+    color: #222222;
+    font-weight: bold;
+}
+
+.descripcion {
+    margin: 0.55rem 0 1rem;
+    color: var(--muted);
+}
+
+.redeem-button {
+    padding: 0.6rem 1.15rem;
+}
+
+/* ===================== PRODUCTO DESTACADO ===================== */
+.featured-section {
+    padding: 4rem 2rem;
+    background: #f9f9f9;
+}
+
+.featured-section .section-heading,
+.final-grid {
+    max-width: 1200px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.final-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 370px));
+    justify-content: center;
+}
+
+/* ===================== MISIONES DIARIAS :3 ===================== */
+.missions-section {
+    padding: 4.3rem 2rem 4.5rem;
+    background: #f9f9f9;
+    border-top: 1px solid #eeeeee;
+}
+
+.missions-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.missions-heading {
+    margin: 0 auto 2rem;
+    text-align: center;
+}
+
+.missions-heading h2 {
+    color: #333333;
+    font-size: 1.5rem;
+    line-height: 1.3;
+}
+
+.missions-doodle {
+    display: block;
+    margin-top: 0.35rem;
+    color: #8aa9bf;
+    font-size: 1.25rem;
+}
+
+.mission-list {
+    display: grid;
+    gap: 1rem;
+}
+
+/* Encargos horizontales, como la referencia original */
+.mission-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 1.5rem;
+    min-width: 0;
+    padding: 1rem 1.25rem;
+    background: #ffffff;
+    border: 1px solid #eeeeee;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.mission-row:hover {
+    border-color: #d7e5ef;
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-2px);
+}
+
+.mission-main {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    min-width: 0;
+}
+
+.mission-face {
+    width: 44px;
+    height: 44px;
+    flex: 0 0 44px;
+    display: grid;
+    place-items: center;
+    color: #333333;
+    background: aliceblue;
+    border: 1px solid #dce8f0;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.mission-face-heart {
+    color: #66849b;
+    font-size: 1.65rem;
+}
+
+.mission-copy h3 {
+    margin-bottom: 0.15rem;
+    color: #333333;
+    font-size: 1rem;
+}
+
+.mission-copy p {
+    color: #777777;
+    font-size: 0.9rem;
+}
+
+.mission-controls {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    min-width: 0;
+}
+
+.mision-reward {
+    padding: 0.4rem 0.8rem;
+    color: #333333;
+    background: aliceblue;
+    border: 1px solid #dce8f0;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.mission-button,
+.file-picker {
+    min-height: 36px;
+    padding: 0.5rem 1rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #111111;
+    background: aliceblue;
+    border: 1px solid #e1edf5;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.mission-button:not(:disabled):hover,
+.file-picker:hover {
+    color: #ffffff;
+    background: #333333;
+    transform: translateY(-1px);
+}
+
+.mission-button:disabled {
+    color: #777777;
+    background: #eeeeee;
+    border-color: #e3e3e3;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.photo-input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    clip-path: inset(50%);
+}
+
+.photo-input:focus-visible + .mission-button {
+    outline: 3px solid #9bc4df;
+    outline-offset: 3px;
+}
+
+.file-picker[aria-disabled="true"] {
+    color: #777777;
+    background: #eeeeee;
+    border-color: #e3e3e3;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.mission-controls-photo {
+    max-width: 430px;
+}
+
+.photo-preview-wrap {
+    order: 5;
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    width: 100%;
+    min-width: 0;
+    padding: 0.45rem;
+    background: #f8fbfd;
+    border: 1px solid #e3edf4;
+    border-radius: 7px;
+}
+
+.photo-preview-wrap[hidden] {
+    display: none;
+}
+
+.photo-preview {
+    width: 48px;
+    height: 48px;
+    flex: 0 0 48px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.photo-file-name {
+    min-width: 0;
+    overflow-wrap: anywhere;
+    color: #777777;
+    font-size: 0.8rem;
+}
+
+.mission-status {
+    order: 6;
+    width: 100%;
+    margin: 0;
+    color: #6b8799;
+    font-size: 0.8rem;
+    text-align: right;
+}
+
+.mission-status:empty {
+    display: none;
+}
+
+.mission-status.is-complete {
+    color: #527d62;
+    font-weight: bold;
+}
+
+.upload-note {
+    order: 7;
+    width: 100%;
+    color: #929292;
+    font-size: 0.74rem;
+    text-align: right;
+}
+
+/* Historial discreto: conserva tus canjes sin competir con las misiones */
+.redemption-history {
+    margin-top: 1.5rem;
+    padding: 1rem 1.2rem;
+    background: #ffffff;
+    border: 1px solid #e5edf2;
+    border-radius: 9px;
+}
+
+.history-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.45rem;
+}
+
+.history-heading h3 {
+    color: #555555;
+    font-size: 1rem;
+}
+
+.history-icon {
+    color: #8aa9bf;
+    font-size: 1.25rem;
+}
+
+.empty-history {
+    color: #888888;
+    font-size: 0.85rem;
+}
+
+.redemption-list {
+    display: grid;
+    gap: 0.45rem;
+    list-style: none;
+}
+
+.redemption-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.55rem 0.7rem;
+    background: #f8fbfd;
+    border: 1px solid #edf2f6;
+    border-radius: 6px;
+}
+
+.redemption-name {
+    color: #444444;
+    font-weight: bold;
+}
+
+.redemption-meta {
+    color: #858585;
+    font-size: 0.8rem;
+    text-align: right;
+}
+
+/* ===================== AVISOS ===================== */
+.toast {
+    position: fixed;
+    right: 1.2rem;
+    bottom: 1.2rem;
+    z-index: 50;
+    max-width: min(360px, calc(100vw - 2.4rem));
+    padding: 0.9rem 1.15rem;
+    color: #ffffff;
+    background: #333333;
+    border-radius: 10px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.18);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(12px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.site-footer {
+    padding: 1.5rem;
+    color: #7a858d;
+    background: #ffffff;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+/* ===================== RESPONSIVE ===================== */
+@media (max-width: 800px) {
+    .nav-bar {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        gap: 0.75rem;
+        padding: 1rem;
+    }
+
+    .logo,
+    .wallet,
+    .nav-links {
+        grid-column: 1;
+        justify-self: center;
+    }
+
+    .logo { grid-row: 1; }
+    .wallet { grid-row: 2; }
+
+    .nav-links {
+        grid-row: 3;
+        width: 100%;
+        justify-content: center;
+        gap: 0.9rem 1.2rem;
+    }
+
+    .mission-row {
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+    }
+
+    .mission-controls {
+        justify-content: flex-start;
+        padding-left: 3.75rem;
+    }
+
+    .mission-controls-photo {
+        max-width: none;
+    }
+
+    .mission-status {
+        text-align: left;
+    }
+}
+
+@media (max-width: 520px) {
+    .products-section,
+    .featured-section,
+    .missions-section {
+        padding: 3rem 1rem;
+    }
+
+    .productos-grid,
+    .final-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .nav-links {
+        font-size: 0.9rem;
+    }
+
+    .wallet {
+        padding: 0.45rem 0.8rem;
+        font-size: 0.9rem;
+    }
+
+    .mission-row {
+        padding: 1rem;
+    }
+
+    .mission-main {
+        gap: 0.75rem;
+    }
+
+    .mission-face {
+        width: 40px;
+        height: 40px;
+        flex-basis: 40px;
+    }
+
+    .mission-controls {
+        padding-left: 0;
+        gap: 0.5rem;
+    }
+
+    .mission-controls-photo .mision-reward {
+        margin-right: auto;
+    }
+
+    .redemption-history {
+        padding: 1.2rem;
+    }
+
+    .redemption-item {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 0.2rem;
+    }
+
+    .redemption-meta {
+        text-align: left;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <nav class="nav-bar" aria-label="Navegación principal">
+            <a class="logo" href="#inicio">tiendita :3</a>
+
+            <ul class="nav-links">
+                <li><a href="#inicio">Bienvenidoo :D</a></li>
+                <li><a href="#productos">ta weno :P</a></li>
+                <li><a href="#misiones">Misiones ♡</a></li>
+            </ul>
+
+            <div class="wallet" aria-label="Saldo de pounedas" aria-live="polite">
+                <span class="wallet-icon" aria-hidden="true">🪙</span>
+                <strong id="coinCount">0</strong>
+                <span>pounedas</span>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="inicio" class="hero">
+            <h1>Bienvenido a la tiendita :3</h1>
+            <p>encuentra tu producto ideal!!!! :D</p>
+            <a class="cta-button" href="#productos">Ver productos</a>
+        </section>
+
+        <section id="productos" class="products-section">
+            <div class="section-heading">
+                <h2>Productos destacados!! :P</h2>
+            </div>
+
+            <div class="productos-grid">
+                <article class="productos-card">
+                    <img src="imagen1.jpg" alt="Ilustración de beshitos" loading="lazy">
+                    <div class="product-content">
+                        <h3>beshitosss :D</h3>
+                        <p class="precio">2 pounedas</p>
+                        <p class="descripcion">ataque de besitos jsjs</p>
+                        <button class="redeem-button" type="button" data-product="beshitosss" data-price="2">Canjear</button>
+                    </div>
+                </article>
+
+                <article class="productos-card">
+                    <img src="imagen2.jpg" alt="Ilustración de dibujitos" loading="lazy">
+                    <div class="product-content">
+                        <h3>dibujitos :P</h3>
+                        <p class="precio">5 pounedas</p>
+                        <p class="descripcion">pelea de dibujitos jsjs</p>
+                        <button class="redeem-button" type="button" data-product="dibujitos :P" data-price="5">Canjear</button>
+                    </div>
+                </article>
+
+                <article class="productos-card">
+                    <img src="imagen3.jpg" alt="Nos casamos por Boblox" loading="lazy">
+                    <div class="product-content">
+                        <h3>nos casamos por boblox :3</h3>
+                        <p class="precio">7 pounedas</p>
+                        <p class="descripcion">noi casamos jsjs</p>
+                        <button class="redeem-button" type="button" data-product="nos casamos por boblox :3" data-price="7">Canjear</button>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section id="final" class="featured-section">
+            <div class="section-heading">
+                <h2>Solo pa pitucos &gt;:3!!</h2>
+            </div>
+
+            <div class="final-grid">
+                <article class="final-card">
+                    <img src="imagen4.jpg" alt="Producto especial: hago lo que quieras" loading="lazy">
+                    <div class="product-content">
+                        <h3>Hago lo que quieras &gt;:D</h3>
+                        <p class="precio">15 pounedas</p>
+                        <p class="descripcion">que quieres que haga?? jsjs</p>
+                        <button class="redeem-button" type="button" data-product="Hago lo que quieras >:D" data-price="15">Canjear</button>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- MISIONES DIARIAS :3 -->
+        <section id="misiones" class="missions-section">
+            <div class="missions-inner">
+                <div class="missions-heading">
+                    <h2>Misiones diarias :3</h2>
+                    <span class="missions-doodle" aria-hidden="true">♡</span>
+                </div>
+
+                <div class="mission-list">
+                    <article class="mission-row" id="loginMissionCard">
+                        <div class="mission-main">
+                            <span class="mission-face" aria-hidden="true">:3</span>
+                            <div class="mission-copy">
+                                <h3>Entrar hoy :3</h3>
+                                <p>Pasar por la tiendita po</p>
+                            </div>
+                        </div>
+
+                        <div class="mission-controls">
+                            <span class="mision-reward">+1 pouneda</span>
+                            <button class="mission-button" id="loginMissionBtn" type="button">Reclamar :3</button>
+                            <p class="mission-status" id="loginMissionStatus" aria-live="polite"></p>
+                        </div>
+                    </article>
+
+                    <article class="mission-row" id="photoMissionCard">
+                        <div class="mission-main">
+                            <span class="mission-face mission-face-heart" aria-hidden="true">♡</span>
+                            <div class="mission-copy">
+                                <h3>Mandarme tu carita :3</h3>
+                                <p>Una foto tuya po</p>
+                            </div>
+                        </div>
+
+                        <div class="mission-controls mission-controls-photo">
+                            <span class="mision-reward">+3 pounedas</span>
+                            <label class="file-picker" for="photoInput">Elegir foto :3</label>
+                            <input class="photo-input" type="file" id="photoInput" accept="image/*">
+                            <button class="mission-button" id="photoMissionBtn" type="button" disabled>Enviar :3</button>
+
+                            <div class="photo-preview-wrap" id="photoPreviewWrap" hidden>
+                                <img id="photoPreview" class="photo-preview" alt="Vista previa de la foto seleccionada">
+                                <span id="photoFileName" class="photo-file-name"></span>
+                            </div>
+                            <p class="mission-status" id="photoMissionStatus" aria-live="polite"></p>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="redemption-history" aria-labelledby="redemptionTitle">
+                    <div class="history-heading">
+                        <h3 id="redemptionTitle">Canjes :3</h3>
+                        <span class="history-icon" aria-hidden="true">♡</span>
+                    </div>
+                    <p id="emptyHistory" class="empty-history">Todavía no hay canjes :c</p>
+                    <ul id="redemptionHistory" class="redemption-list"></ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <footer class="site-footer">
+        <p>Te amo :3</p>
+    </footer>
+    <script>
+/* =========================================================
+   TIENDITA :3 — POUNEDAS, MISIONES DIARIAS Y CANJES
+   Persistencia local mediante localStorage.
+   ========================================================= */
+
+(() => {
+    "use strict";
+
+    const STORAGE = {
+        coins: "pounedas",
+        missions: "missions",
+        legacyMissions: "missionsCompleted",
+        redemptions: "pounedasRedemptions"
+    };
+
+    const DAILY_REWARDS = {
+        login: 1,
+        photo: 3
+    };
+
+    const MAX_PHOTO_SIZE = 8 * 1024 * 1024; // 8 MB
+
+    const elements = {
+        coinCount: document.getElementById("coinCount"),
+        wallet: document.querySelector(".wallet"),
+        loginButton: document.getElementById("loginMissionBtn"),
+        loginStatus: document.getElementById("loginMissionStatus"),
+        photoInput: document.getElementById("photoInput"),
+        photoButton: document.getElementById("photoMissionBtn"),
+        photoStatus: document.getElementById("photoMissionStatus"),
+        photoPreviewWrap: document.getElementById("photoPreviewWrap"),
+        photoPreview: document.getElementById("photoPreview"),
+        photoFileName: document.getElementById("photoFileName"),
+        history: document.getElementById("redemptionHistory"),
+        emptyHistory: document.getElementById("emptyHistory"),
+        toast: document.getElementById("toast")
+    };
+
+    let previewUrl = null;
+    let toastTimer = null;
+
+    function readJSON(key, fallback) {
+        try {
+            const raw = localStorage.getItem(key);
+            return raw ? JSON.parse(raw) : fallback;
+        } catch (error) {
+            console.warn(`No se pudo leer ${key} desde localStorage.`, error);
+            return fallback;
+        }
+    }
+
+    function writeJSON(key, value) {
+        try {
+            localStorage.setItem(key, JSON.stringify(value));
+            return true;
+        } catch (error) {
+            console.error(`No se pudo guardar ${key} en localStorage.`, error);
+            showToast("El navegador no pudo guardar los cambios. Revisa el almacenamiento.");
+            return false;
+        }
+    }
+
+    function getTodayKey() {
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, "0");
+        const day = String(now.getDate()).padStart(2, "0");
+        return `${year}-${month}-${day}`;
+    }
+
+    function getCoins() {
+        try {
+            const stored = Number.parseInt(localStorage.getItem(STORAGE.coins), 10);
+            return Number.isFinite(stored) && stored >= 0 ? stored : 0;
+        } catch (error) {
+            console.warn("No se pudo leer el saldo de pounedas.", error);
+            return 0;
+        }
+    }
+
+    function setCoins(amount, animate = true) {
+        const safeAmount = Math.max(0, Math.floor(Number(amount) || 0));
+
+        try {
+            localStorage.setItem(STORAGE.coins, String(safeAmount));
+        } catch (error) {
+            console.error("No se pudo guardar el saldo de pounedas.", error);
+            showToast("No se pudo guardar tu saldo en este navegador.");
+            return false;
+        }
+
+        if (elements.coinCount) {
+            elements.coinCount.textContent = safeAmount.toLocaleString("es-PE");
+        }
+
+        if (animate && elements.wallet) {
+            elements.wallet.classList.remove("bump");
+            // Reinicia la animación para que se reproduzca en cada cambio de saldo.
+            void elements.wallet.offsetWidth;
+            elements.wallet.classList.add("bump");
+        }
+
+        return true;
+    }
+
+    function getMissions() {
+        const current = readJSON(STORAGE.missions, null);
+        if (current && typeof current === "object") return current;
+
+        // Compatibilidad con la clave usada en una versión anterior.
+        const legacy = readJSON(STORAGE.legacyMissions, {});
+        return legacy && typeof legacy === "object" ? legacy : {};
+    }
+
+    function saveMissions(missions) {
+        return writeJSON(STORAGE.missions, missions);
+    }
+
+    function showToast(message) {
+        if (!elements.toast) return;
+
+        elements.toast.textContent = message;
+        elements.toast.classList.add("show");
+        window.clearTimeout(toastTimer);
+        toastTimer = window.setTimeout(() => {
+            elements.toast.classList.remove("show");
+        }, 2800);
+    }
+
+    function setMissionStatus(element, message, completed = false) {
+        if (!element) return;
+        element.textContent = message;
+        element.classList.toggle("is-complete", completed);
+    }
+
+    function updateMissionUI() {
+        const missions = getMissions();
+        const today = getTodayKey();
+        const loginDone = missions.login === today;
+        const photoDone = missions.photo === today;
+
+        if (elements.loginButton) {
+            elements.loginButton.disabled = loginDone;
+            elements.loginButton.textContent = loginDone ? "Listo ✓" : "Reclamar :3";
+        }
+        setMissionStatus(
+            elements.loginStatus,
+            loginDone ? "Listo por hoy :3" : "",
+            loginDone
+        );
+
+        if (elements.photoButton) {
+            elements.photoButton.disabled = photoDone || !hasValidSelectedPhoto();
+            elements.photoButton.textContent = photoDone ? "Listo ✓" : "Enviar :3";
+        }
+        if (elements.photoInput) elements.photoInput.disabled = photoDone;
+        const filePicker = document.querySelector('.file-picker[for="photoInput"]');
+        if (filePicker) {
+            filePicker.textContent = photoDone ? "Foto lista ✓" : "Elegir foto :3";
+            filePicker.setAttribute("aria-disabled", String(photoDone));
+        }
+        if (photoDone) {
+            setMissionStatus(elements.photoStatus, "Listo por hoy :3", true);
+        }
+    }
+
+    function hasValidSelectedPhoto() {
+        const file = elements.photoInput?.files?.[0];
+        return Boolean(file && file.type.startsWith("image/") && file.size <= MAX_PHOTO_SIZE);
+    }
+
+    function completeDailyMission(missionId, reward) {
+        const missions = getMissions();
+        const today = getTodayKey();
+
+        if (missions[missionId] === today) {
+            showToast("Ya la hiciste hoy :3");
+            return false;
+        }
+
+        missions[missionId] = today;
+        if (!saveMissions(missions)) return false;
+        if (!setCoins(getCoins() + reward)) return false;
+
+        updateMissionUI();
+        showToast(`¡+${reward} ${reward === 1 ? "pouneda" : "pounedas"}! :3`);
+        return true;
+    }
+
+    function clearPhotoPreview() {
+        if (previewUrl) {
+            URL.revokeObjectURL(previewUrl);
+            previewUrl = null;
+        }
+        if (elements.photoPreview) elements.photoPreview.removeAttribute("src");
+        if (elements.photoPreviewWrap) elements.photoPreviewWrap.hidden = true;
+        if (elements.photoFileName) elements.photoFileName.textContent = "";
+    }
+
+    function handlePhotoSelection() {
+        clearPhotoPreview();
+        const file = elements.photoInput?.files?.[0];
+
+        if (!file) {
+            setMissionStatus(elements.photoStatus, "Elige una foto :c");
+            updateMissionUI();
+            return;
+        }
+
+        if (!file.type.startsWith("image/")) {
+            elements.photoInput.value = "";
+            setMissionStatus(elements.photoStatus, "Esa no es una imagen :c");
+            updateMissionUI();
+            return;
+        }
+
+        if (file.size > MAX_PHOTO_SIZE) {
+            elements.photoInput.value = "";
+            setMissionStatus(elements.photoStatus, "Máximo 8 MB :c");
+            updateMissionUI();
+            return;
+        }
+
+        previewUrl = URL.createObjectURL(file);
+        elements.photoPreview.src = previewUrl;
+        elements.photoFileName.textContent = file.name;
+        elements.photoPreviewWrap.hidden = false;
+        setMissionStatus(elements.photoStatus, "Foto lista :3");
+        updateMissionUI();
+    }
+
+    function getRedemptions() {
+        const data = readJSON(STORAGE.redemptions, []);
+        return Array.isArray(data) ? data : [];
+    }
+
+    function renderRedemptions() {
+        if (!elements.history || !elements.emptyHistory) return;
+
+        const redemptions = getRedemptions();
+        elements.history.replaceChildren();
+        elements.emptyHistory.hidden = redemptions.length > 0;
+
+        redemptions.slice(0, 8).forEach((redemption) => {
+            const item = document.createElement("li");
+            item.className = "redemption-item";
+
+            const name = document.createElement("span");
+            name.className = "redemption-name";
+            name.textContent = redemption.product || "Producto";
+
+            const meta = document.createElement("span");
+            meta.className = "redemption-meta";
+            const date = new Date(redemption.date);
+            const readableDate = Number.isNaN(date.getTime())
+                ? "Fecha no disponible"
+                : date.toLocaleString("es-PE", { dateStyle: "short", timeStyle: "short" });
+            meta.textContent = `${redemption.price} pounedas · ${readableDate}`;
+
+            item.append(name, meta);
+            elements.history.appendChild(item);
+        });
+    }
+
+    function redeemProduct(product, price) {
+        const currentCoins = getCoins();
+
+        if (!product || !Number.isInteger(price) || price <= 0) {
+            showToast("No se pudo identificar el producto o su precio.");
+            return;
+        }
+
+        if (currentCoins < price) {
+            showToast(`Te faltan ${price - currentCoins} pounedas :c`);
+            return;
+        }
+
+        const approved = window.confirm(`¿Canjear «${product}» por ${price} pounedas?`);
+        if (!approved) return;
+
+        if (!setCoins(currentCoins - price)) return;
+
+        const redemptions = getRedemptions();
+        redemptions.unshift({
+            product,
+            price,
+            date: new Date().toISOString()
+        });
+
+        if (!writeJSON(STORAGE.redemptions, redemptions.slice(0, 30))) {
+            // El saldo ya se actualizó; se informa que el historial no pudo guardarse.
+            showToast("Canje realizado, pero no se pudo guardar el historial.");
+        } else {
+            showToast("¡Canjeado! :3");
+        }
+
+        renderRedemptions();
+    }
+
+    function connectEvents() {
+        elements.loginButton?.addEventListener("click", () => {
+            completeDailyMission("login", DAILY_REWARDS.login);
+        });
+
+        elements.photoInput?.addEventListener("change", handlePhotoSelection);
+
+        elements.photoButton?.addEventListener("click", () => {
+            if (!hasValidSelectedPhoto()) {
+                showToast("Elige una fotito primero :c");
+                return;
+            }
+            completeDailyMission("photo", DAILY_REWARDS.photo);
+        });
+
+        document.querySelectorAll(".redeem-button").forEach((button) => {
+            button.addEventListener("click", () => {
+                const product = button.dataset.product;
+                const price = Number.parseInt(button.dataset.price, 10);
+                redeemProduct(product, price);
+            });
+        });
+    }
+
+    function init() {
+        setCoins(getCoins(), false);
+        connectEvents();
+        updateMissionUI();
+        renderRedemptions();
+    }
+
+    window.addEventListener("beforeunload", clearPhotoPreview);
+    init();
+})();
+
+    </script>
+</body>
+</html>
